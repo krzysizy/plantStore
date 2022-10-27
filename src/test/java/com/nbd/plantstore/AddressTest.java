@@ -18,13 +18,20 @@ public class AddressTest {
     public void addAddressTest() {
         String city = "Lodz";
         String street = "Piotrkowska";
-        Integer street_num = 105;
+        Integer street_num = 34;
         addressService.addAddress(city, street, street_num);
     }
 
     @Test
     public void deleteAddressTest() {
-        addressService.deleteAddress(4L);
+        addressService.deleteAddress(7L);
+    }
+
+    @Test
+    public void updateAddressTest() {
+        addressService.streetUpdate("Kilinskiego",1L);
+        addressService.cityUpdate("Zgierz", addressService.findAddressByIdIfExist(1L));
+        addressService.streetNumUpdate(11,  addressService.findAddressByIdIfExist(1L));
     }
 
 }

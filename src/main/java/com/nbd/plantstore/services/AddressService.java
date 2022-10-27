@@ -8,6 +8,7 @@ import com.nbd.plantstore.entities.Address;
 import com.nbd.plantstore.repositories.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -18,7 +19,7 @@ public class AddressService {
 
 
     public Address findAddressByIdIfExist (Long id) {
-        return addressRepository.findById(id).orElseThrow(() -> new addressNotExistById(id));
+        return addressRepository.findAddress(id).orElseThrow(() -> new addressNotExistById(id));
     }
 
     public void deleteAddress(Long id) {
@@ -27,6 +28,21 @@ public class AddressService {
 
     public Address findAddressByAllIfExist (String city, String street, Integer street_number) {
         return addressRepository.findByCityAndStreetAndStreet_number(city,street,street_number).orElseThrow(() -> new addressNotExistbyAll(city,street,street_number));
+    }
+
+    @Transactional
+    public void streetUpdate (String newStreet, Long id) {
+        addressRepository.updateStreet(newStreet, id);
+    }
+
+    @Transactional
+    public void cityUpdate (String newCity, Address address) {
+        addressRepository.updateStreet(newCity, address.getId());
+    }
+
+    @Transactional
+    public void streetNumUpdate (Integer newStreetNum, Address address) {
+        addressRepository.updateStreetNum(newStreetNum, address.getId());
     }
 
     public Address addAddress (String city, String street, int street_number) {
