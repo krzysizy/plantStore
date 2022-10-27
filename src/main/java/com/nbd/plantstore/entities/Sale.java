@@ -29,7 +29,7 @@ public class Sale {
 
     @Column(name = "s_time", nullable = false )
     @ColumnDefault("CURRENT_TIMESTAMP")
-    private Timestamp s_time;
+    private Timestamp s_time = new Timestamp(System.currentTimeMillis());
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "client_id", nullable = false,

@@ -48,7 +48,7 @@ public class ClientService {
         clientRepository.updateAddress(id, client.getId());
     }
 
-    @Transactional
+    @Transactional(rollbackFor = {thisAddressAlreadyExist.class, clientAlreadyExist.class})
     public Client addClientAndAddress (String name, String surname, String email, String city, String street, Integer street_number) {
 
         if (clientRepository.existsByEmail(email))
