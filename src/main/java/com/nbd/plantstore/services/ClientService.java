@@ -7,6 +7,7 @@ import com.nbd.plantstore.repositories.AddressRepository;
 import com.nbd.plantstore.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ClientService {
@@ -24,13 +25,15 @@ public class ClientService {
         return findClientByIdIfExist(id).getAddress();
     }
 
-    public void deleteAddress(Long id) {
+    public void deleteClient(Long id) {
         clientRepository.delete(findClientByIdIfExist(id));
     }
 
-    public Client findAddressByEmailIfExist (String email) {
+    public Client findClientByEmailIfExist (String email) {
         return clientRepository.findClientByEmail(email).orElseThrow(() -> new clientNotExistbyEmail(email));
     }
+
+    @Transactional
     public Client addClientAndAddress (String name, String surname, String email, String city, String street, Integer street_number) {
 
         if (clientRepository.existsByEmail(email))

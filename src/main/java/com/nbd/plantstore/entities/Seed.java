@@ -6,14 +6,19 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-@Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @DiscriminatorValue("seed")
 public class Seed extends Product {
 
-    @Column(name = "weight", nullable = false)
+    @Setter
+    @Column(name = "weight")
     private Integer weight;
+
+    @Builder
+    public Seed(Long id, Double p_base_price, Integer p_count, String p_name, Integer weight) {
+        super(id, p_base_price, p_count, p_name);
+        this.weight = weight;
+    }
 
 }

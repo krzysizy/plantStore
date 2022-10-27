@@ -15,7 +15,7 @@ public class ClientTest {
     public void addClientTest() {
         String name = "Ula";
         String surname = "Fraczek";
-        String email = "ula@poczta.pl";
+        String email = "ula@edu.pl";
         String city = "Lodz";
         String street = "Sierakowskiego";
         Integer street_num = 1;

@@ -31,7 +31,7 @@ public class Sale {
     @ColumnDefault("CURRENT_TIMESTAMP")
     private Timestamp s_time;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "client_id", nullable = false,
             foreignKey = @ForeignKey(
                     name = "sales_client_fk"

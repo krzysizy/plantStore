@@ -1,9 +1,6 @@
 package com.nbd.plantstore.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.PositiveOrZero;
@@ -14,7 +11,7 @@ import javax.validation.constraints.PositiveOrZero;
 @AllArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "product_categorie", discriminatorType = DiscriminatorType.STRING)
-@Table(name = "products")
+@Table(name = "product")
 public abstract class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,12 +27,7 @@ public abstract class Product {
     @Column(name = "p_count", nullable = false)
     protected Integer p_count;
 
-    @Column(name = "p_name", nullable = false)
+    @Column(name = "p_name", nullable = false, unique = true)
     protected String p_name;
-
-    @Setter
-    @Version
-    @Column(name = "product_version")
-    protected Integer product_version;
 
 }
