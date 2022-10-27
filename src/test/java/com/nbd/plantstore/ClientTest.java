@@ -18,7 +18,7 @@ public class ClientTest {
         String email = "ula@edu.pl";
         String city = "Lodz";
         String street = "Sierakowskiego";
-        Integer street_num = 1;
+        Integer street_num = 1456;
         clientService.addClientAndAddress(name, surname, email, city, street, street_num);
     }
 

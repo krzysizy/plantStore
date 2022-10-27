@@ -42,7 +42,7 @@ public class SaleService {
     }
 
     @Transactional
-    public Sale addSale (Integer sProductCount, Double finalCost, Client client, Product product) {
+    public Sale addSale (Integer sProductCount, Client client, Product product) {
 
         if (saleRepository.existsByEmailAndPName(client.getEmail(), product.getP_name()))
             throw new saleAlreadyExist(client, product);
@@ -50,7 +50,7 @@ public class SaleService {
         productService.updateProductCount(sProductCount, product.getId());
         return saleRepository.save(Sale.builder()
                 .s_product_count(sProductCount)
-                .s_final_cost(finalCost)
+                .s_final_cost(sProductCount * product.getP_base_price())
                 .client(client)
                 .products(product)
                 .build());
