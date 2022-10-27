@@ -18,6 +18,9 @@ public class SaleService {
     @Autowired
     private SaleRepository saleRepository;
 
+    @Autowired
+    private ProductService productService;
+
     public Sale findSaleByIdIfExist (Long id) {
         return saleRepository.findById(id).orElseThrow(() -> new saleNotExistById(id));
     }
@@ -44,6 +47,7 @@ public class SaleService {
         if (saleRepository.existsByEmailAndPName(client.getEmail(), product.getP_name()))
             throw new saleAlreadyExist(client, product);
 
+        productService.updateProductCount(sProductCount, product.getId());
         return saleRepository.save(Sale.builder()
                 .s_product_count(sProductCount)
                 .s_final_cost(finalCost)

@@ -31,6 +31,8 @@ public class ProductTest {
     }
 
     @Test
-    public void deleteClientTest() {
+    public void deleteProductsAndFindProductByNameTest() {
+        productService.deleteProduct(productService.findProductByNameIfExist("Marchewka13").getId());
+        productService.deleteProduct(productService.findProductByNameIfExist("Sosna15").getId());
     }
 }
