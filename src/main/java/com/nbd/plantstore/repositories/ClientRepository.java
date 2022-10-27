@@ -38,4 +38,8 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
     @Query("update Client c set c.address = :newAddressId where c.id = :id")
     void updateAddress(@Param("newAddressId")Long newAddressId, @Param("id")Long id);
 
+    @Query("select case when count(c) > 0 then true else false end from Client c where " +
+            "c.address.id = :addressId")
+    boolean existsByAddress(@Param("addressId")Long addressId);
+
 }

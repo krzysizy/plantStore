@@ -25,6 +25,10 @@ public class ClientService {
         return findClientByIdIfExist(id).getAddress();
     }
 
+    public boolean checkIsClientExistByAddress (Long addressId) {
+        return clientRepository.existsByAddress(addressId);
+    }
+
     public void deleteClient(Long id) {
         clientRepository.delete(findClientByIdIfExist(id));
     }
