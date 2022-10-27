@@ -24,12 +24,12 @@ public class AddressTest {
 
     @Test
     public void deleteAddressTest() {
-        addressService.deleteAddress(7L);
+        addressService.deleteAddress(addressService.findAddressByAllIfExist("Lodz", "Piotrkowska", 34).getId());
     }
 
     @Test
     public void updateAddressTest() {
-        addressService.streetUpdate("Kilinskiego",1L);
+        addressService.streetUpdate("Kilinskiego",addressService.findAddressByIdIfExist(1L));
         addressService.cityUpdate("Zgierz", addressService.findAddressByIdIfExist(1L));
         addressService.streetNumUpdate(11,  addressService.findAddressByIdIfExist(1L));
     }

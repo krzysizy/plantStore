@@ -32,6 +32,16 @@ public class ProductService {
         return productRepository.findProductByName(name).orElseThrow(() -> new clientNotExistbyEmail(name));
     }
 
+    @Transactional
+    public void updateProductCount (Integer soldCount, Long id ) {
+        productRepository.changeCount(soldCount, id);
+    }
+
+
+    public void updateProductBasePrice (Double basePrice, Long id ) {
+        productRepository.updateBasePrice(basePrice, id);
+    }
+
     public Product addSeed(Double base_price, Integer count, String name, Integer weight ) {
         if (productRepository.existsByName(name))
             throw new clientAlreadyExist(name);

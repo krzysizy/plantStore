@@ -29,6 +29,7 @@ public class Client {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
+    @Setter
     @ManyToOne(cascade = CascadeType.REMOVE, optional = false)
     @JoinColumn(name = "address_id", nullable = false,
             foreignKey = @ForeignKey(

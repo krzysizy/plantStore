@@ -34,6 +34,21 @@ public class ClientService {
     }
 
     @Transactional
+    public void surnameUpdate (String newSurname, Client client) {
+        clientRepository.updateSurname(newSurname, client.getId());
+    }
+
+    @Transactional
+    public void cityUpdate (String newEmai, Client client) {
+        clientRepository.updateEmail(newEmai, client.getId());
+    }
+
+    @Transactional
+    public void clientAdd (Client client, Long id) {
+        clientRepository.updateAddress(id, client.getId());
+    }
+
+    @Transactional
     public Client addClientAndAddress (String name, String surname, String email, String city, String street, Integer street_number) {
 
         if (clientRepository.existsByEmail(email))

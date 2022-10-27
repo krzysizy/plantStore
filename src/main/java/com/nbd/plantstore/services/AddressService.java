@@ -19,7 +19,7 @@ public class AddressService {
 
 
     public Address findAddressByIdIfExist (Long id) {
-        return addressRepository.findAddress(id).orElseThrow(() -> new addressNotExistById(id));
+        return addressRepository.findById(id).orElseThrow(() -> new addressNotExistById(id));
     }
 
     public void deleteAddress(Long id) {
@@ -31,8 +31,8 @@ public class AddressService {
     }
 
     @Transactional
-    public void streetUpdate (String newStreet, Long id) {
-        addressRepository.updateStreet(newStreet, id);
+    public void streetUpdate (String newStreet, Address address) {
+        addressRepository.updateStreet(newStreet, address.getId());
     }
 
     @Transactional
