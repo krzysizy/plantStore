@@ -23,9 +23,10 @@ public interface AddressRepository extends JpaRepository<Address, Long> {
     @Query("update Address a set a.street = :newStreet where a.id = :id")
     void updateStreet(@Param("newStreet")String newStreet, @Param("id")Long id);
 
+    @Modifying
     @Query("update Address a set a.city = :newCity where a.id = :id")
     void updateCity(@Param("newCity")String newCity, @Param("id")Long id);
-
+    @Modifying
     @Query("update Address a set a.street_number = :newStreetNum where a.id = :id")
     void updateStreetNum(@Param("newStreetNum")Integer newStreetNum, @Param("id")Long id);
 
