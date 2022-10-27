@@ -19,8 +19,6 @@ public class AddressTest {
     @Autowired
     private AddressService addressService;
 
-    @Autowired
-    private ClientService clientService;
 
     String city = "Lodz";
     String street = "Piotrkowska";
@@ -46,14 +44,7 @@ public class AddressTest {
             addressService.deleteAddress(addressService.findAddressByAllIfExist(city, street, 123456).getId());
         });
 
-        clientService.addClientAndAddress("a","a","aa@edu.pl","b", "b", 1);
-        assertThrows(canNotDeleteAddress.class, () -> {
-            addressService.deleteAddress(addressService.findAddressByAllIfExist("b", "b", 1).getId());
-        });
-        clientService.deleteClient(clientService.findClientByEmailIfExist("aa@edu.pl").getId());
-        assertThrows(addressNotExistbyAll.class, () -> {
-            addressService.findAddressByAllIfExist("b", "b",1);
-        });
+
 
     }
 

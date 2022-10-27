@@ -2,6 +2,7 @@ package com.nbd.plantstore;
 
 
 import com.nbd.plantstore.Exceptions.addressNotExistbyAll;
+import com.nbd.plantstore.Exceptions.canNotDeleteAddress;
 import com.nbd.plantstore.Exceptions.clientAlreadyExist;
 import com.nbd.plantstore.Exceptions.clientNotExistbyEmail;
 import com.nbd.plantstore.services.AddressService;
@@ -47,6 +48,14 @@ public class ClientTest {
         });
         assertThrows(addressNotExistbyAll.class, () -> {
             addressService.findAddressByAllIfExist(city, street, street_num);
+        });
+        clientService.addClientAndAddress("a","a","aa@edu.pl","b", "b", 1);
+        assertThrows(canNotDeleteAddress.class, () -> {
+            addressService.deleteAddress(addressService.findAddressByAllIfExist("b", "b", 1).getId());
+        });
+        clientService.deleteClient(clientService.findClientByEmailIfExist("aa@edu.pl").getId());
+        assertThrows(addressNotExistbyAll.class, () -> {
+            addressService.findAddressByAllIfExist("b", "b",1);
         });
     }
 }
