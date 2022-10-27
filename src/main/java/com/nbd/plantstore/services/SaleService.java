@@ -8,6 +8,7 @@ import com.nbd.plantstore.entities.Sale;
 import com.nbd.plantstore.repositories.SaleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.CriteriaBuilder;
 
@@ -36,6 +37,8 @@ public class SaleService {
     public Sale findSaleByClientAndAddressIfExist (Client client, Product product) {
         return saleRepository.findSaleByEmailAndPName(client.getEmail(), product.getP_name()).orElseThrow(() -> new saleNotExistbyEmailAndPName(client, product));
     }
+
+    @Transactional
     public Sale addSale (Integer sProductCount, Double finalCost, Client client, Product product) {
 
         if (saleRepository.existsByEmailAndPName(client.getEmail(), product.getP_name()))

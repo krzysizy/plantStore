@@ -11,7 +11,7 @@ import javax.validation.constraints.PositiveOrZero;
 @AllArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "product_categorie", discriminatorType = DiscriminatorType.STRING)
-@Table(name = "product")
+@Table(name = "products")
 public abstract class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

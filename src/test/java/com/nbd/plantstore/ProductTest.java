@@ -15,8 +15,8 @@ public class ProductTest {
     public void addSeedTest() {
         Double price = 7.5;
         Integer count = 500;
-        String name = "Marchewka130";
-        Integer weight = 130;
+        String name = "Marchewka13";
+        Integer weight = 13;
         productService.addSeed(price,count, name, weight);
     }
 
@@ -24,8 +24,8 @@ public class ProductTest {
     public void addPlateTest() {
         Double price = 7.5;
         Integer count = 500;
-        String name = "Sosna1";
-        Integer height = 100;
+        String name = "Sosna15";
+        Integer height = 15;
         String period = "wiosna";
         productService.addPlate(price,count, name, height, period);
     }
