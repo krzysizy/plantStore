@@ -30,4 +30,9 @@ public abstract class Product {
     @Column(name = "p_name", nullable = false, unique = true)
     protected String p_name;
 
+
+//    @Column(name = "version")
+//    @Version
+//    protected Integer version;
+
 }

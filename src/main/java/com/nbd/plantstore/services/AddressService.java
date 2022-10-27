@@ -21,7 +21,6 @@ public class AddressService {
     @Autowired
     private ClientService clientService;
 
-
     public Address findAddressByIdIfExist (Long id) {
         return addressRepository.findById(id).orElseThrow(() -> new addressNotExistById(id));
     }
@@ -47,7 +46,7 @@ public class AddressService {
     public void cityUpdate (String newCity, Address address) {
         if(addressRepository.existsAddressByCityAndStreetAndStreet_number(address.getCity(), address.getStreet(), address.getStreet_number()))
             throw new thisAddressAlreadyExist(address.getCity(), address.getStreet(), address.getStreet_number());
-        addressRepository.updateStreet(newCity, address.getId());
+        addressRepository.updateCity(newCity, address.getId());
     }
 
     @Transactional
