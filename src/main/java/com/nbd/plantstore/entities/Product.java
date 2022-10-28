@@ -31,8 +31,8 @@ public abstract class Product {
     protected String p_name;
 
 
-//    @Column(name = "version")
-//    @Version
-//    protected Integer version;
+    @Column(name = "version")
+    @Version
+    protected Integer version;
 
 }

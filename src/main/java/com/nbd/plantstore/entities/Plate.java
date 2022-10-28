@@ -20,8 +20,8 @@ public class Plate extends Product {
     private String period;
 
     @Builder
-    public Plate(Long id, Double p_base_price, Integer p_count, String p_name, Integer height, String period) {
-        super(id, p_base_price, p_count, p_name);
+    public Plate(Long id, Double p_base_price, Integer p_count, String p_name, Integer height, String period, Integer version) {
+        super(id, p_base_price, p_count, p_name, version);
         this.height = height;
         this.period = period;
     }

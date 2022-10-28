@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import java.sql.Timestamp;
 
 @Service
 public class SaleService {
@@ -41,19 +42,18 @@ public class SaleService {
         return saleRepository.findSaleByEmailAndPName(client.getEmail(), product.getP_name()).orElseThrow(() -> new saleNotExistbyEmailAndPName(client, product));
     }
 
-    @Transactional
+    @Transactional(rollbackFor = {nbdExceptions.class})
     public Sale addSale (Integer sProductCount, Client client, Product product) {
-
-        if (saleRepository.existsByEmailAndPName(client.getEmail(), product.getP_name()))
-            throw new saleAlreadyExist(client, product);
-
+        if (sProductCount > product.getP_count()) {
+            throw new NotEnoughtProductException(product.getP_name());
+        }
         productService.updateProductCount(sProductCount, product.getId());
         return saleRepository.save(Sale.builder()
                 .s_product_count(sProductCount)
                 .s_final_cost(sProductCount * product.getP_base_price())
                 .client(client)
                 .products(product)
+                .s_time(new Timestamp(System.currentTimeMillis()))
                 .build());
-
     }
 }

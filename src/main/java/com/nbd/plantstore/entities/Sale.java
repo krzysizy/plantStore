@@ -27,9 +27,8 @@ public class Sale {
     @Column(name = "s_final_cost", nullable = false)
     private Double s_final_cost;
 
-    @Column(name = "s_time", nullable = false )
-    @ColumnDefault("CURRENT_TIMESTAMP")
-    private Timestamp s_time = new Timestamp(System.currentTimeMillis());
+    @Column(name = "s_time")
+    private Timestamp s_time;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "client_id", nullable = false,

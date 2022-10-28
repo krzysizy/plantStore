@@ -19,10 +19,12 @@ public class AddressTest {
     @Autowired
     private AddressService addressService;
 
-
     String city = "Lodz";
     String street = "Piotrkowska";
-    Integer street_num = 34;
+    Integer street_num = 40;
+
+
+
 
     @Test
     public void addAddressTest() {
@@ -31,7 +33,7 @@ public class AddressTest {
         assertThrows(thisAddressAlreadyExist.class, () -> {
             addressService.addAddress(city, street, street_num);
         });
-        //Update
+//        Update
         addressService.streetUpdate("Kilinskiego",addressService.findAddressByAllIfExist(city, street, street_num));
         street = "Kilinskiego";
         addressService.cityUpdate("Zgierz", addressService.findAddressByAllIfExist(city, street, street_num));

@@ -35,22 +35,22 @@ public class AddressService {
 
     @Transactional
     public void streetUpdate (String newStreet, Address address) {
-        if(addressRepository.existsAddressByCityAndStreetAndStreet_number(address.getCity(), address.getStreet(), address.getStreet_number()))
-            throw new thisAddressAlreadyExist(address.getCity(), address.getStreet(), address.getStreet_number());
+        if(addressRepository.existsAddressByCityAndStreetAndStreet_number(address.getCity(), newStreet, address.getStreet_number()))
+            throw new thisAddressAlreadyExist(address.getCity(), newStreet, address.getStreet_number());
         addressRepository.updateStreet(newStreet, address.getId());
     }
 
     @Transactional
     public void cityUpdate (String newCity, Address address) {
-        if(addressRepository.existsAddressByCityAndStreetAndStreet_number(address.getCity(), address.getStreet(), address.getStreet_number()))
-            throw new thisAddressAlreadyExist(address.getCity(), address.getStreet(), address.getStreet_number());
+        if(addressRepository.existsAddressByCityAndStreetAndStreet_number(newCity, address.getStreet(), address.getStreet_number()))
+            throw new thisAddressAlreadyExist(newCity, address.getStreet(), address.getStreet_number());
         addressRepository.updateCity(newCity, address.getId());
     }
 
     @Transactional
     public void streetNumUpdate (Integer newStreetNum, Address address) {
-        if(addressRepository.existsAddressByCityAndStreetAndStreet_number(address.getCity(), address.getStreet(), address.getStreet_number()))
-            throw new thisAddressAlreadyExist(address.getCity(), address.getStreet(), address.getStreet_number());
+        if(addressRepository.existsAddressByCityAndStreetAndStreet_number(address.getCity(), address.getStreet(), newStreetNum))
+            throw new thisAddressAlreadyExist(address.getCity(), address.getStreet(), newStreetNum);
         addressRepository.updateStreetNum(newStreetNum, address.getId());
     }
 

@@ -37,22 +37,26 @@ public class ClientService {
         return clientRepository.findClientByEmail(email).orElseThrow(() -> new clientNotExistbyEmail(email));
     }
 
-    @Transactional
+    public boolean clientExists(String email) {
+        return clientRepository.existsByEmail(email);
+    }
+
+
     public void surnameUpdate (String newSurname, Client client) {
         clientRepository.updateSurname(newSurname, client.getId());
     }
 
-    @Transactional
+
     public void cityUpdate (String newEmai, Client client) {
         clientRepository.updateEmail(newEmai, client.getId());
     }
 
-    @Transactional
+
     public void clientAdd (Client client, Long id) {
         clientRepository.updateAddress(id, client.getId());
     }
 
-    @Transactional(rollbackFor = {thisAddressAlreadyExist.class, clientAlreadyExist.class})
+    @Transactional(rollbackFor = {nbdExceptions.class})
     public Client addClientAndAddress (String name, String surname, String email, String city, String street, Integer street_number) {
 
         if (clientRepository.existsByEmail(email))
@@ -64,6 +68,5 @@ public class ClientService {
                 .email(email)
                 .address(addressService.addAddress(city, street, street_number))
                 .build());
-
     }
 }

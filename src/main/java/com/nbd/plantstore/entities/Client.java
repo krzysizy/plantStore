@@ -30,7 +30,7 @@ public class Client {
     private String email;
 
     @Setter
-    @ManyToOne(cascade = CascadeType.REMOVE, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "address_id", nullable = false,
             foreignKey = @ForeignKey(
             name = "client_address_fk"

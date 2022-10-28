@@ -16,8 +16,8 @@ public class Seed extends Product {
     private Integer weight;
 
     @Builder
-    public Seed(Long id, Double p_base_price, Integer p_count, String p_name, Integer weight) {
-        super(id, p_base_price, p_count, p_name);
+    public Seed(Long id, Double p_base_price, Integer p_count, String p_name, Integer weight, Integer version) {
+        super(id, p_base_price, p_count, p_name, version);
         this.weight = weight;
     }
 

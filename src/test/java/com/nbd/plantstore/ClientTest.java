@@ -24,38 +24,28 @@ public class ClientTest {
 
     String name = "Ula";
     String surname = "Fraczek";
-    String email = "ula@edu.pl";
+    String email = "ula@poczta.pl";
     String city = "Lodz";
     String street = "Sierakowskiego";
-    Integer street_num = 7;
+    Integer street_num = 10;
     @Test
     public void addClientTest() {
         clientService.addClientAndAddress(name, surname, email, city, street, street_num);
         assertThrows(clientAlreadyExist.class, () -> {
             clientService.addClientAndAddress(name, surname, email, city, "Konikowa", street_num);
         });
-        //RollbackTest
+
         assertThrows(addressNotExistbyAll.class, () -> {
             addressService.findAddressByAllIfExist(city, "Konikowa", street_num);
         });
+        clientService.deleteClient(clientService.findClientByEmailIfExist(email).getId());
+        addressService.deleteAddress(addressService.findAddressByAllIfExist(city, street, street_num).getId());
     }
 
     @Test
     public void deleteClientTest() {
-        clientService.deleteClient(clientService.findClientByEmailIfExist(email).getId());
         assertThrows(clientNotExistbyEmail.class, () -> {
             clientService.findClientByEmailIfExist(email);
-        });
-        assertThrows(addressNotExistbyAll.class, () -> {
-            addressService.findAddressByAllIfExist(city, street, street_num);
-        });
-        clientService.addClientAndAddress("a","a","aa@edu.pl","b", "b", 1);
-        assertThrows(canNotDeleteAddress.class, () -> {
-            addressService.deleteAddress(addressService.findAddressByAllIfExist("b", "b", 1).getId());
-        });
-        clientService.deleteClient(clientService.findClientByEmailIfExist("aa@edu.pl").getId());
-        assertThrows(addressNotExistbyAll.class, () -> {
-            addressService.findAddressByAllIfExist("b", "b",1);
         });
     }
 }

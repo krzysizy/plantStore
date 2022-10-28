@@ -17,9 +17,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
 
 
+    @Lock(LockModeType.OPTIMISTIC_FORCE_INCREMENT)
     Optional<Product> findById(Long id);
 
 
+    @Lock(LockModeType.OPTIMISTIC_FORCE_INCREMENT)
     @Query("select p from Product p where " +
             "p.p_name = :p_name")
     Optional<Product> findProductByName(@Param("p_name")String p_name);
@@ -29,9 +31,16 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "p.p_name = :p_name")
     boolean existsByName(@Param("p_name")String p_name);
 
+
     @Modifying
     @Query("update Product p set p.p_count = p.p_count - :soldPCout where p.id = :id")
     void changeCount(@Param("soldPCout") Integer soldCount, Long id);
+
+
+    @Modifying
+    @Query("update Product p set p.p_count = :addPCout where p.id = :id")
+    void addCount(@Param("addPCout") Integer addCount, Long id);
+
 
     @Modifying
     @Query("update Product p set p.p_base_price = :basePrice where p.id = :id")
