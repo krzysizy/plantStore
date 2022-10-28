@@ -44,9 +44,6 @@ public class AddressTest {
             addressService.deleteAddress(addressService.findAddressByAllIfExist(city, street, 123456).getId());
         });
 
-
-
     }
-
 
 }

@@ -18,16 +18,14 @@ public class AddressService {
     @Autowired
     private AddressRepository addressRepository;
 
-    @Autowired
-    private ClientService clientService;
 
     public Address findAddressByIdIfExist (Long id) {
         return addressRepository.findById(id).orElseThrow(() -> new addressNotExistById(id));
     }
 
     public void deleteAddress(Long id) {
-        if(clientService.checkIsClientExistByAddress(id))
-            throw new canNotDeleteAddress();
+//        if(clientService.checkIsClientExistByAddress(id))
+//            throw new canNotDeleteAddress();
         addressRepository.delete(findAddressByIdIfExist(id));
     }
 
